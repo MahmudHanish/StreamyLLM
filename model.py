@@ -7,7 +7,7 @@ model = TFBertForSequenceClassification.from_pretrained('sentiment_model')
 tokenizer = BertTokenizer.from_pretrained('sentiment_model')
 
 # Load the CSV file
-df = pd.read_csv('song_lyrics.csv')
+df = pd.read_csv('/song_lyrics.csv')
 
 def predict_sentiment(text, model, tokenizer):
     # Preprocess the input text
@@ -38,8 +38,12 @@ def predict_sentiment(text, model, tokenizer):
 # Add a column for sentiment
 df['Sentiment'] = df['Lyrics'].apply(lambda x: predict_sentiment(x, model, tokenizer)[0])
 
+# Display sentiment for each song
+for index, row in df.iterrows():
+    print(f"Song: {row['Title']} by {row['Artist']}, Sentiment: {row['Sentiment']}")
+
 # Save the updated DataFrame to a new CSV file
-df.to_csv('song_lyrics_with_sentiment.csv', index=False)
+df.to_csv('/song_lyrics_s', index=False)
 
 # Calculate the average sentiment
 average_sentiment = df['Sentiment'].mean()

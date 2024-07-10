@@ -12,7 +12,7 @@ tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
 
 
 
-df = pd.read_csv("reviews.csv")
+df = pd.read_csv("/reviews.csv")
 df = df.sample(frac=1).reset_index(drop=True)
 df.sample()
 
@@ -101,5 +101,3 @@ model.fit(train_dataset.shuffle(100).batch(32).repeat(2), epochs=2, validation_d
 # Save the trained model
 model.save_pretrained('sentiment_model')
 tokenizer.save_pretrained('sentiment_model')
-
-
